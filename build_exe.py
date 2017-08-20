@@ -6,10 +6,10 @@ Created on Sun Aug 20 00:44:53 2017
 """
 
 from distutils.core import setup
-import py2exe
-import os
-import glob
+import py2exe, sys, os, glob
 from calc import add
+
+sys.argv.append('py2exe')
 
 def find_data_files(source,target,patterns):
     """Locates the specified data-files and returns the matches
@@ -41,10 +41,16 @@ setup(
       version = "1.0",
       description = "Melhor jogo do mundo",
       author = "Pedro da Luz",
-      windows = ["main.py"],
-      data_file = find_data_files(
+      windows = [
+              {
+                      "script": "main.py",
+                      "icon_resources": [(0,"icon.ico")]
+              }
+      ],
+      data_files = find_data_files(
               'data',
               'data', [
+                  'config.ini',
                   'fontes/*',
                   'arte/ataques/*',
                   'arte/fundo/*',
@@ -63,5 +69,17 @@ setup(
                   'sons/efeitos/passo/*',
                   'sons/efeitos/personagem/*',
                   ]
-            ),
+      ),
+      options = {
+              "py2exe":{
+                      "includes": "game",
+                      "compressed": 1,
+                      "optimize": 2,
+                      "bundle_files": 3,
+                      "xref": False,
+                      "skip_archive": False,
+                      "ascii": False,
+                      }
+              },
+        zipfile = None,
     )
