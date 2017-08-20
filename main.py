@@ -9,11 +9,11 @@ from pygame.locals import *
 from sys import exit
 
 import configparser
-cfg = configparser.ConfigParser()
+config = configparser.ConfigParser()
 
 if __name__ == '__main__':
-    cfg.read('data/config.ini')
-    fps = cfg.getint('config', 'FPS')
+    config.read('data/config.ini')
+    fps = config.getint('DEFAULT', 'FPS')
     
     pygame.init()
                
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     
     clock = pygame.time.Clock()
     
-    pygame.display.set_caption('SUPER SMASH ARANHA-MORCEGO')
+    pygame.display.set_caption(str(config['DEFAULT']['NOME_DO_JOGO']))
     
     while True:
         for event in pygame.event.get():
