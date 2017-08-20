@@ -1,2 +1,3 @@
-pygame=1.9.3
-calc=1.0
+JC1
+pygame==1.9.3
+calc==1.0
