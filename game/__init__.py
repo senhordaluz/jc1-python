@@ -24,8 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-GAME_NAME = "SUPER SMASH ARANHA-MORCEGO"
-
 version_info = (1, 0, 0, "dev0")
 
 __version__ = ".".join(map(str, version_info))
@@ -34,24 +32,9 @@ __project_url__ = 'https://github.com/senhordaluz/jc1-python'
 
 import os
 # Diretório do arquivo
-_PATH = os.path.dirname(os.path.abspath(__file__))
-__dir__ = os.path.abspath(os.path.join(_PATH, os.pardir))
-DATA_PATH = ''.join([__dir__, '/data'])
-# Artes
-ARTE_MAPAS_PATH = 'data/arte/fundo/'
-ARTE_PORTAL_PATH = 'data/arte/portal/'
-ARTE_MENU_PATH = 'data/arte/menu/'
-ARTE_ARAQUESL_PATH = 'data/arte/ataques/'
-ARTE_ICONE_PATH = 'data/arte/icone/'
-ARTE_JOGADOR1_PATH = 'data/arte/personagens/jogador1/'
-ARTE_JOGADOR2_PATH = 'data/arte/personagens/jogador2/'
-ARTE_BOSS01_PATH = 'data/arte/personagens/boss01/'
-ARTE_VILAO01_PATH = 'data/arte/personagens/vilao01/'
-ARTE_VILAO02_PATH = 'data/arte/personagens/vilao03/'
-ARTE_VILAO03_PATH = 'data/arte/personagens/vilao03/'
-ARTE_VILAO04_PATH = 'data/arte/personagens/vilao04/'
-
-SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = [800,600]
+PATH = os.path.dirname(os.path.abspath(__file__))
+PARENT_PATH = os.path.abspath(os.path.join(PATH, os.pardir))
+DATA_PATH = 'data/'
 
 def get_versions(reporev=True):
     """Obtem informações para os componentes"""

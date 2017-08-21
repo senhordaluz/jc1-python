@@ -4,41 +4,25 @@ Created on Sun Aug 20 00:39:56 2017
 
 @author: Pedro da Luz
 """
-import pygame, game
+import pygame, os
 from pygame.locals import *
-from sys import exit
-from game import Sprite
+from game import my
 
-import configparser
-config = configparser.ConfigParser()
-config.read('data/config.ini')
-fps = config.getint('DEFAULT', 'FPS')
-size = width, height = config.getint('DEFAULT', 'SCREEN_WIDTH'), config.getint('DEFAULT', 'SCREEN_HEIGHT')
+from game import engine
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
+pygame.mixer.pre_init(44100,-16,2, 1024)
+pygame.init()
+pygame.display.set_icon(pygame.image.load('data/arte/icone/aranha1.png'))
+pygame.display.set_caption(my.GAME_NAME)
+
+def main():
+    runGame()
+    
+def runGame():
+    Engine = engine.Engine()
+    while my.jogoRodando:
+        Engine.update()
 
 if __name__ == '__main__':
-    pygame.init()
-               
-    screen = pygame.display.set_mode(game.SIZE)
-    
-    clock = pygame.time.Clock()
-    
-    pygame.display.set_caption(game.GAME_NAME)
-    
-    background = Sprite.Imagem_de_Fundo()
-    group = pygame.sprite.Group()
-    group.add(background)
-    
-    pygame.display.flip()
-    
-    while True:
-        pygame.event.pump()
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                exit(0)
-            elif event.type == VIDEORESIZE:
-                screen = pygame.display.set_mode(
-                        event.dict['size'], HWSURFACE | DOUBLEBUF | RESIZABLE)
-                background.image = pygame.transform.scale(background.image, event.dict['size'])
-        screen.blit(background.image, background.rect)
-        pygame.display.update()
-        time_passed = clock.tick(fps)
+    main()
