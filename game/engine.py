@@ -23,11 +23,12 @@ class Engine:
         my.screen = pygame.display.set_mode(my.SIZE)
         
         self.background = Background.Imagem_de_Fundo()
-        
+        self.portalCima = Background.Portal('cima')
         
     def update(self):
         my.event.update()
         
+        my.FASE.draw(my.screen)
         my.FASE.update()
         
         pygame.display.update()
