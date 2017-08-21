@@ -24,12 +24,13 @@ class Engine:
         
         self.background = Background.Imagem_de_Fundo()
         self.portalCima = Background.Portal('cima')
+        self.portalBaixo = Background.Portal('baixo')
         
     def update(self):
         my.event.update()
         
-        my.FASE.draw(my.screen)
         my.FASE.update()
+        my.FASE.draw(my.screen)
         
         pygame.display.update()
         my.FPSCLOCK.tick(my.FPS)
