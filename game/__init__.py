@@ -32,7 +32,9 @@ __project_url__ = 'https://github.com/senhordaluz/jc1-python'
 
 import os
 # Diretório do arquivo
-__dir__ = os.path.dirname(os.path.abspath(__file__))
+PATH = os.path.dirname(os.path.abspath(__file__))
+PARENT_PATH = os.path.abspath(os.path.join(PATH, os.pardir))
+DATA_PATH = 'data/'
 
 def get_versions(reporev=True):
     """Obtem informações para os componentes"""

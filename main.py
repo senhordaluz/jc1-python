@@ -4,29 +4,25 @@ Created on Sun Aug 20 00:39:56 2017
 
 @author: Pedro da Luz
 """
-import pygame, game
+import pygame, os
 from pygame.locals import *
-from sys import exit
+from game import my
 
-import configparser
-cfg = configparser.ConfigParser()
+from game import engine
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
+pygame.mixer.pre_init(44100,-16,2, 1024)
+pygame.init()
+pygame.display.set_icon(pygame.image.load('data/arte/icone/aranha1.png'))
+pygame.display.set_caption(my.GAME_NAME)
+
+def main():
+    runGame()
+    
+def runGame():
+    Engine = engine.Engine()
+    while my.jogoRodando:
+        Engine.update()
 
 if __name__ == '__main__':
-    cfg.read('data/config.ini')
-    fps = cfg.getint('config', 'FPS')
-    
-    pygame.init()
-               
-    screen = pygame.display.set_mode((640, 480), 0, 32)
-    
-    clock = pygame.time.Clock()
-    
-    pygame.display.set_caption('SUPER SMASH ARANHA-MORCEGO')
-    
-    while True:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                exit(0)
-        screen.blit(pygame.Surface(screen.get_size()), (0,0))
-        pygame.display.update()
-        time_passed = clock.tick(fps)
+    main()
