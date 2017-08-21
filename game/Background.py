@@ -44,6 +44,10 @@ class Imagem_de_Fundo(pygame.sprite.Sprite):
         else:
             self.fase += 1
         self._troca_fase()
+    
+    def update(self):
+        my.screen.blit(self.image, self.rect)
+        self.proxima_fase()
         
 class Portal(pygame.sprite.Sprite):
     """Classe para instanciar os portais da fase

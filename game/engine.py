@@ -28,8 +28,7 @@ class Engine:
     def update(self):
         my.event.update()
         
-        my.screen.blit(self.background.image, self.background.rect)
-        self.background.proxima_fase()
+        my.FASE.update()
         
         pygame.display.update()
         my.FPSCLOCK.tick(my.FPS)
