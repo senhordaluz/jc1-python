@@ -7,7 +7,6 @@ Created on Sun Aug 20 00:39:56 2017
 import pygame, os
 from pygame.locals import *
 from game import my
-
 from game import engine
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
