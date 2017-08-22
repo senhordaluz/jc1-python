@@ -16,9 +16,11 @@ pygame.display.set_icon(pygame.image.load('data/arte/icone/aranha1.png'))
 pygame.display.set_caption(my.GAME_NAME)
 
 def main():
+    """Roda o jogo"""
     runGame()
     
 def runGame():
+    """Instancia a engine e dá início ao loop do jogo"""
     Engine = engine.Engine()
     while my.jogoRodando:
         Engine.update()

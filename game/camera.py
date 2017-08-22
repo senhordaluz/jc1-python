@@ -17,14 +17,17 @@ class SpriteSheet(object):
     
     @property
     def rect(self):
+        """Retorna rect da posição a ser cordada do sprite"""
         return self._rect
     
     @rect.setter
     def rect(self, value):
+        """Grava rect da posição a ser cordata do sprite"""
         self._rect = value
     
     @property
     def image(self):
+        """Retorna a imagem cortada a partir do rect salvo na classe"""
         return self.image_at(self.rect, -1)
 
     # Load a specific image from a specific rectangle

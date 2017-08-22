@@ -11,6 +11,7 @@ from game import input
 from game import my
 from game import Background
 from game import event
+from game import sound
 
 class Engine:
     """Roda o jogo"""
@@ -24,7 +25,11 @@ class Engine:
         
         Background.Inicializa_Fase()
         
+        sound.fase_01()
+        
+        
     def update(self):
+        """Roda uma vez a cada frame do jogo"""
         my.event.update()
         
         my.FASE.update()
