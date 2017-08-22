@@ -16,3 +16,4 @@ class EventHandler:
     def update(self):
         """Roda a cada frame do jogo"""
         my.input.get()
+        if my.input.pressedKeys != [] : print(my.input.pressedKeys)

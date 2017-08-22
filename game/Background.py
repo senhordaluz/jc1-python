@@ -33,6 +33,7 @@ class Imagem_de_Fundo(pygame.sprite.Sprite):
     
     def update(self):
         """Roda a cada frame do jogo"""
+        self.image = pygame.transform.scale(self.image, my.SIZE)
         ##self.proxima_fase()
         pass
     
@@ -57,6 +58,7 @@ class Imagem_de_Fundo(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, my.SIZE)
         
     def proxima_fase(self):
+        """Carrega próxima fase"""
         if self.fase == 4:
             self.fase = 1
         else:
@@ -70,7 +72,7 @@ class Portal(pygame.sprite.Sprite):
     """
     def __init__(self, tipo):
         pygame.sprite.Sprite.__init__(self)
-        self.fase = 1
+        self.fase = 2
         self.tipo = tipo
 
         self.spritesheet = camera.SpriteSheet(self._get_image_sheet())
@@ -85,7 +87,8 @@ class Portal(pygame.sprite.Sprite):
         """Roda a cada frame do jogo"""
         self._troca_sprite()
         self.image = self.spritesheet.image
-        self.image = pygame.transform.scale(self.image, self.rect.size)  
+        self.redimencionar()
+        self.image = pygame.transform.scale(self.image, self.rect.size)
         
     def _get_image_sheet(self):
         """Retorna local do arquivo do portal"""
@@ -133,21 +136,8 @@ class Portal(pygame.sprite.Sprite):
         """Salva o rect com a posição do portal em tela
             além da posição a ser cortada no spritesheet
         """
-        if self.tipo == 'cima':
-            self.rect = pygame.Rect(362,0,80,50)
-            self.spritesheet.rect = pygame.Rect(0,0,59,30)
-
-        elif self.tipo == 'baixo':
-            self.rect = pygame.Rect(362,550,80,50)
-            self.spritesheet.rect = pygame.Rect(0,0,59,30)
-
-        elif self.tipo == 'esquerda':
-            self.rect = pygame.Rect(0,280,50,80)
-            self.spritesheet.rect = pygame.Rect(0,0,30,59)
-
-        elif self.tipo == 'direita':
-            self.rect = pygame.Rect(748,265,50,80)
-            self.spritesheet.rect = pygame.Rect(0,0,30,59)
+        self._set_sheetRect()
+        self.redimencionar()
             
     def _troca_sprite(self):
         """Troca o sprite de animação do portal"""
@@ -163,4 +153,51 @@ class Portal(pygame.sprite.Sprite):
                 self.spritesheet.rect.y = 0
             
             else:
-                self.spritesheet.rect.y += 59       
+                self.spritesheet.rect.y += 59
+    
+    def _set_sheetRect(self):
+        if self.tipo == 'cima':
+            self.spritesheet.rect = pygame.Rect(0,0,59,30)
+
+        elif self.tipo == 'baixo':
+            self.spritesheet.rect = pygame.Rect(0,0,59,30)
+
+        elif self.tipo == 'esquerda':
+            self.spritesheet.rect = pygame.Rect(0,0,30,59)
+
+        elif self.tipo == 'direita':
+            self.spritesheet.rect = pygame.Rect(0,0,30,59)
+            
+    def redimencionar(self):
+        """Redimenciona o tamanho do portal para se adaptar
+            ao tamanho da tela"""
+        width, height = my.SIZE
+        x = width/800
+        y = height/600
+        if self.tipo == 'cima':
+            self.rect = pygame.Rect(362*x,0*y,80*x,50*y)
+
+        elif self.tipo == 'baixo':
+            self.rect = pygame.Rect(362*x,550*y,100*x,50*y)
+
+        elif self.tipo == 'esquerda':
+            self.rect = pygame.Rect(0*x,285*y,70*x,50*y)
+
+        elif self.tipo == 'direita':
+            self.rect = pygame.Rect(728*x,265*y,70*x,55*y)
+            
+    def _troca_fase(self):
+        """Troca o arquivo de imagem do portal para o
+            da próxima fase"""
+        self.spritesheet = camera.SpriteSheet(self._get_image_sheet())
+        self._set_sheetRect()
+        self.image = self.spritesheet.image
+        self.image = pygame.transform.scale(self.image, self.rect.size)
+        
+    def proxima_fase(self):
+        """Carrega o portal da proxima fase"""
+        if self.fase == 3:
+            self.fase = 1
+        else:
+            self.fase += 1
+        self._troca_fase()
