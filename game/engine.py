@@ -11,6 +11,7 @@ from game import input
 from game import my
 from game import Background
 from game import event
+from game import sound
 
 class Engine:
     """Roda o jogo"""
@@ -22,14 +23,17 @@ class Engine:
         
         my.screen = pygame.display.set_mode(my.SIZE)
         
-        self.background = Background.Imagem_de_Fundo()
+        Background.Inicializa_Fase()
+        
+        sound.fase_01()
         
         
     def update(self):
+        """Roda uma vez a cada frame do jogo"""
         my.event.update()
         
-        my.screen.blit(self.background.image, self.background.rect)
-        self.background.proxima_fase()
+        my.FASE.update()
+        my.FASE.draw(my.screen)
         
         pygame.display.update()
         my.FPSCLOCK.tick(my.FPS)

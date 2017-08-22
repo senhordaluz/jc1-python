@@ -7,7 +7,6 @@ Created on Sun Aug 20 00:39:56 2017
 import pygame, os
 from pygame.locals import *
 from game import my
-
 from game import engine
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -17,9 +16,11 @@ pygame.display.set_icon(pygame.image.load('data/arte/icone/aranha1.png'))
 pygame.display.set_caption(my.GAME_NAME)
 
 def main():
+    """Roda o jogo"""
     runGame()
     
 def runGame():
+    """Instancia a engine e dá início ao loop do jogo"""
     Engine = engine.Engine()
     while my.jogoRodando:
         Engine.update()
